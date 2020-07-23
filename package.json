@@ -17,6 +17,12 @@
     "ssr"
   ],
   "author": "sjones6",
+  "homepage": "https://github.com/sjones6/nestjs-jsx-template-engine",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/sjones6/nestjs-jsx-template-engine.git"
+  },
+  "bugs": "https://github.com/sjones6/nestjs-jsx-template-engine/issues",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.0.14",
