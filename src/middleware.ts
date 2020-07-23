@@ -1,6 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { renderToString } from 'react-dom/server'
 
 @Injectable()
 export class RenderMiddleware implements NestMiddleware {
@@ -12,8 +11,7 @@ export class RenderMiddleware implements NestMiddleware {
         return oRender(template, opt);
       }
       try {
-        const str = renderToString(template({ ...this.locals || {}, ...opt }));
-        res.send(str);
+        res.send(template({ ...this.locals || {}, ...opt }));
       } catch (err) {
         this.req.next(err);
       }

@@ -70,18 +70,17 @@ export class AppController {
 Define your template with JSX:
 ```tsx
 // app.view.tsx
-import { h, JSX }  from 'nest-jsx-template-engine'
+import { h }  from 'nest-jsx-template-engine'
 import { AppViewTransferObject } from './app.vto'
 
-export function App(props: AppViewTransferObject): JSX.ElementClass {
+export function App(props: AppViewTransferObject): string {
   return <html>
     <body>
-      <h1 className="foo">{props.name}</h1>
+      <h1 class="foo">{props.name}</h1>
     </body>
   </html>
 }
 ```
-JSX is react-flavored, so use things like `className` and `htmlFor`. 
 
 You can define a view-transfer interface for the props passed into your template. This way, you can strongly-type the values passed from your controller into your view.
 
@@ -93,3 +92,7 @@ export interface AppViewTransferObject {
 ```
 
 See a working demo in the Github repo.
+
+## A Note on React-Flavored JSX
+
+This package does not support React flavored JSX (e.g., `className`, `htmlFor`, etc). It expects basic HTML properties.

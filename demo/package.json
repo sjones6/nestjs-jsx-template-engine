@@ -24,10 +24,12 @@
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
+    "nest-jsx-template-engine": "file:./../",
+    "react": "^16.13.1",
+    "reakit": "^1.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4",
-    "nest-jsx-template-engine": "file:./../"
+    "rxjs": "^6.5.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

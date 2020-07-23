@@ -4,7 +4,7 @@
   "description": "JSX-based + typescript template engine for NestJS applications",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "pre:publish": "build",
     "publish": "npm publish",
     "publish:patch": "npm version patch && npm publish",
@@ -19,8 +19,8 @@
   "author": "sjones6",
   "homepage": "https://github.com/sjones6/nestjs-jsx-template-engine",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/sjones6/nestjs-jsx-template-engine.git"
+    "type": "git",
+    "url": "https://github.com/sjones6/nestjs-jsx-template-engine.git"
   },
   "bugs": "https://github.com/sjones6/nestjs-jsx-template-engine/issues",
   "license": "MIT",
@@ -32,8 +32,6 @@
   },
   "dependencies": {
     "@nestjs/common": "^7.2.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "reflect-metadata": "^0.1.13"
   }
 }

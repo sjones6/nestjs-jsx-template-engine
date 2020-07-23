@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import { JSX } from 'react';
 import { RENDER_METADATA } from '@nestjs/common/constants';
 
 /**
@@ -11,7 +10,7 @@ import { RENDER_METADATA } from '@nestjs/common/constants';
  *
  * @publicApi
  */
-export function Render(template: (props: any) => JSX.ElementClass): MethodDecorator {
+export function Render(template: (props: any) => string): MethodDecorator {
   return (
     target: object,
     key: string | symbol,
