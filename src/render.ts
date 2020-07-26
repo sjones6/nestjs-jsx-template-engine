@@ -11,7 +11,7 @@ import { JSXTemplate } from './interfaces/render';
  *
  * @publicApi
  */
-export function Render<T extends JSXTemplate.RenderProps>(template: (props: T) => string): MethodDecorator {
+export function Render<T>(template: (data: T, props: JSXTemplate.RenderProps) => string): MethodDecorator {
   return (
     target: object,
     key: string | symbol,

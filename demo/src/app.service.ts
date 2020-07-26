@@ -3,7 +3,7 @@ import { IAppViewProps } from './app.view';
 
 @Injectable()
 export class AppService {
-  getHello(): Partial<IAppViewProps> {
+  getHello(): IAppViewProps {
     return { name: 'Hello World!' };
   }
 }

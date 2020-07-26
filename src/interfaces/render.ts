@@ -19,7 +19,7 @@ export declare namespace JSXTemplate {
   export interface RenderProps {
     $req: RequestLocalsDecoration
   }
-  export interface RenderFunc<T extends RenderProps> {
-    (props: T): string
+  export interface RenderFunc<T> {
+    (data: T, props: RenderProps): string
   }
 }

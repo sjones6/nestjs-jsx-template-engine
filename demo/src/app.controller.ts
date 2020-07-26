@@ -9,7 +9,7 @@ export class AppController {
 
   @Get()
   @Render<IAppViewProps>(App)
-  getHello(): Partial<IAppViewProps> {
+  getHello(): IAppViewProps {
     return this.appService.getHello();
   }
 }

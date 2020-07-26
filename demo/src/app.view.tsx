@@ -1,6 +1,6 @@
 import { h, JSXTemplate }  from 'nest-jsx-template-engine'
 
-export interface IAppViewProps extends JSXTemplate.RenderProps {
+export interface IAppViewProps {
   name: string
 }
 
@@ -14,14 +14,14 @@ function Component(props: ComponentProps) {
   </div>
 }
 
-export function App(props: IAppViewProps): string {
+export function App(data: IAppViewProps, props: JSXTemplate.RenderProps): string {
   return <html>
     <body>
-      <h1 class="foo-class">{props.name}</h1>
+      <h1 class="foo-class">{data.name}</h1>
       <div>
         Request path: {props.$req.path} from ip {props.$req.ip}
       </div>
-      <Component name={props.name} />
+      <Component name={data.name} />
       <div>
         <span onclick="alert('foo!')" style="text-decoration: underline">Alerts on Click!</span>
       </div>
