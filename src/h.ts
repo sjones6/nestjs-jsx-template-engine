@@ -6,7 +6,7 @@ function stringifyChildren(child: any): string {
       stringifiedChild = child.toString();
     }
     if (Array.isArray(child)) {
-      stringifiedChild = child.join('\n')
+      stringifiedChild = child.join('')
     } else if (child && typeof child.toString === 'function') {
       // there's a value that exposes a `toString` coercion method
       stringifiedChild = child.toString();
