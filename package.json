@@ -1,6 +1,6 @@
 {
   "name": "nest-jsx-template-engine",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "JSX-based + typescript template engine for NestJS applications",
   "main": "dist/index.js",
   "scripts": {
