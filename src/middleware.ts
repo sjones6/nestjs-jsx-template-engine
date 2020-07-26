@@ -6,16 +6,25 @@ import { JSXTemplate } from './interfaces/render';
 export class RenderMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: Function) {
 
-    // abort HTML rendering if response doesn't want html
-    if (this.applyStrictAcceptHtmlCheck(req) && !req.accepts('html')) {
-      return next();
-    }
-
+    const applyStrictAcceptHtmlCheck = this.applyStrictAcceptHtmlCheck(req);
     const oRender = res.render.bind(res);
     const createDecoration = this.createLocalDecoration.bind(this, req, res);
 
     // apply overload to render method
     res.render = function (template: string | JSXTemplate.RenderFunc<any>, opt: any) {
+
+      // apply strict header checks: effect is that it will return
+      // either plain text response for strings returned from a controller
+      // or JSON from an object.
+      if (applyStrictAcceptHtmlCheck && !req.accepts('html')) {
+        if (typeof opt === 'string') {
+          return res.send(opt);
+        } else {
+          return res.json(opt);
+        }
+      }
+
+      // fallback to default express behavior- the template isn't a JSX function
       if (typeof template === 'string') {
         return oRender(template, opt);
       }
