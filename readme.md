@@ -52,7 +52,7 @@ Suggest installing it globally for all routes, but see [Nest's](https://docs.nes
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Render } from 'nest-jsx-template-engine';
-import { App } from './app.view';
+import { App, IAppProps } from './app.view';
 import { AppViewTransferObject } from './app.vto';
 
 @Controller()
@@ -60,8 +60,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Render(App) // pass the App view directly to the Render decorator
-  getHello(): AppViewTransferObject {
+  @Render<IAppProps>(App) // pass the App view directly to the Render decorator
+  getHello(): Partial<IAppProps> {
     return this.appService.getHello();
   }
 }
@@ -70,24 +70,20 @@ export class AppController {
 Define your template with JSX:
 ```tsx
 // app.view.tsx
-import { h }  from 'nest-jsx-template-engine'
+import { h, JSXTemplate }  from 'nest-jsx-template-engine'
 import { AppViewTransferObject } from './app.vto'
 
-export function App(props: AppViewTransferObject): string {
+export interface IAppProps extends JSXTemplate.RenderProps {
+  name: string
+}
+
+export function App(props: IAppProps): string {
   return <html>
     <body>
       <h1 class="foo">{props.name}</h1>
+      <div>Request Path: {props.$req.path} from ip: {props.$req.ip}
     </body>
   </html>
-}
-```
-
-You can define a view-transfer interface for the props passed into your template. This way, you can strongly-type the values passed from your controller into your view.
-
-```typescript
-// app.vto.ts
-export interface AppViewTransferObject {
-  name: string
 }
 ```
 

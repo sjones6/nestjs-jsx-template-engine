@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { RENDER_METADATA } from '@nestjs/common/constants';
+import { JSXTemplate } from './interfaces/render';
 
 /**
  * Route handler method Decorator.  Defines a template to be rendered by the controller.
@@ -10,7 +11,7 @@ import { RENDER_METADATA } from '@nestjs/common/constants';
  *
  * @publicApi
  */
-export function Render(template: (props: any) => string): MethodDecorator {
+export function Render<T extends JSXTemplate.RenderProps>(template: (props: T) => string): MethodDecorator {
   return (
     target: object,
     key: string | symbol,

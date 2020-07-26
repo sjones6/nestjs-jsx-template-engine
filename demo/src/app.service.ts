@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { AppViewTransferObject } from './app.vto';
+import { IAppViewProps } from './app.view';
 
 @Injectable()
 export class AppService {
-  getHello(): AppViewTransferObject {
+  getHello(): Partial<IAppViewProps> {
     return { name: 'Hello World!' };
   }
 }
