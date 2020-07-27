@@ -8,7 +8,7 @@ export class RenderMiddleware implements NestMiddleware {
 
     const applyStrictAcceptHtmlCheck = this.applyStrictAcceptHtmlCheck(req);
     const oRender = res.render.bind(res);
-    const createDecoration = this.createLocalDecoration.bind(this, req, res);
+    const _self = this;
 
     // apply overload to render method
     res.render = function (template: string | JSXTemplate.RenderFunc<any>, opt: any) {
@@ -29,16 +29,7 @@ export class RenderMiddleware implements NestMiddleware {
         return oRender(template, opt);
       }
       try {
-        res.send(
-          template(
-            opt,
-            {
-              ...this.app.locals || {},
-              ...this.locals || {},
-              ...createDecoration(),
-            } as JSXTemplate.RenderProps
-          )
-        );
+        res.send(_self.renderTemplate(template, opt, req, res));
       } catch (err) {
         this.req.next(err);
       }
@@ -64,6 +55,22 @@ export class RenderMiddleware implements NestMiddleware {
         body: req.body
       },
     }
+  }
+
+  public renderTemplate(
+    template: JSXTemplate.RenderFunc<any>,
+    data: any,
+    req: Request,
+    res: Response
+  ): string {
+    return template(
+      data,
+      {
+        ...res.app.locals || {},
+        ...res.locals || {},
+        ...this.createLocalDecoration(req, res),
+      } as JSXTemplate.RenderProps
+    )
   }
 
   /**
